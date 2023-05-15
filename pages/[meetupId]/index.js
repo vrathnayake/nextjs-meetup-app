@@ -36,8 +36,9 @@ export async function getStaticPaths() {
   return {
     //false: I have defined all posoble paths so if user enters anything that is not in the list, show 404
     //true: page will be dynamically generated but the empty page is rendered while data is fetched so you have to handle loading... state
-    //blocking: render the page only after generating. 
-    fallback: 'bloking', 
+    //blocking: This is quite similar to fallback: true, except that it does not return the dummy loading page when a page that hasn't been cached is hit for the first time
+    //Instead, it just makes the browser hang, until the page is rendered for the first time.
+    fallback: "blocking",
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
