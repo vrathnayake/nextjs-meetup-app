@@ -34,7 +34,10 @@ export async function getStaticPaths() {
   client.close();
 
   return {
-    fallback: false, //false: I have defined all posoble paths so if user enters anything that is not in the list, show 404
+    //false: I have defined all posoble paths so if user enters anything that is not in the list, show 404
+    //true: page will be dynamically generated but the empty page is rendered while data is fetched so you have to handle loading... state
+    //blocking: render the page only after generating. 
+    fallback: 'bloking', 
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
